@@ -1,15 +1,32 @@
-import random, csv
+from random import choice, uniform
+import csv
 
-with open('occupations.csv', mode='r') as infile:
-    reader = csv.reader(infile)
-    with open('coors_new.csv', mode='w') as outfile:
-        writer = csv.writer(outfile)
-        mydict = {rows[0]:rows[1] for rows in reader}
+myDict = {}
 
 
-#print mydict
+import csv
+with open('occupations.csv') as csvfile:
+    reader = csv.DictReader(csvfile)
+    for row in reader:
+        job = row['Job Class']
+        percent = float(row['Percentage'])
+        if (job != 'Total'): myDict[job] = percent
 
 
-def randOcc () :
 
-    
+#print myDict
+
+
+def randOcc():
+    benchmark = uniform(0, sum(myDict.itervalues())) #random number between 0 and the sum of the values of each key 
+    total = 0.0
+    for key in myDict:
+        total+=myDict[key]
+        #print "index:" + str(index) + "total:" + str(total)
+        if benchmark < total:
+            #print "WINN"
+            return key
+    return key
+
+
+print randOcc()
