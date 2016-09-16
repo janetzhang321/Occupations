@@ -1,3 +1,6 @@
+#Janet Zhang and Elina HV
+#pd 6
+
 from random import choice, uniform
 import csv
 
